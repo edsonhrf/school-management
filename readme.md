@@ -1,6 +1,6 @@
 <h2>Clean Achitecture Structure Description</h2>
 
-<h5>src</h5>: pasta raiz do código-fonte.
+<h4>src</h5>: pasta raiz do código-fonte.
 
 <h5>**app/**</h5>: amazena lógica específica da aplicação.
 
