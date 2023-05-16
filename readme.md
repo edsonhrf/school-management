@@ -4,12 +4,12 @@ src/
   ├── app/
     ├── controllers/  
     ├── models/
-    ├── repositories/ 
-    ├── services/ 
+    ├── repositories/
+    ├── services/
     └── useCases/
-├── config/ 
-├── database/ 
-├── interfaces/ 
+├── config/
+├── database/
+├── interfaces/
 └── utils/
 
 ________________________________________
