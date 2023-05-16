@@ -1,20 +1,4 @@
-Clean Achitecture Structure
-
-src
-  app/
-    ├── controllers/  
-    ├── models/
-    ├── repositories/
-    ├── services/
-    └── useCases/
-├── config/
-├── database/
-├── interfaces/
-└── utils/
-
-________________________________________
-
-Clean Achitecture Structure Description
+<h4>**Clean Achitecture Structure Description**</h4>
 
 src/: pasta raiz do código-fonte.
 
