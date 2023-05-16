@@ -1,7 +1,7 @@
 Clean Achitecture Structure
 
-src/
-  ├── app/
+src
+  app/
     ├── controllers/  
     ├── models/
     ├── repositories/
