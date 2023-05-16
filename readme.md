@@ -1,25 +1,15 @@
 Clean Achitecture Structure
 
 src/
-
-├── app/
-
-│   ├── controllers/
-
-│   ├── models/
-
-│   ├── repositories/
-
-│   ├── services/
-
-│   └── useCases/
-
-├── config/
-
-├── database/
-
-├── interfaces/
-
+  ├── app/
+    ├── controllers/  
+    ├── models/
+    ├── repositories/ 
+    ├── services/ 
+    └── useCases/
+├── config/ 
+├── database/ 
+├── interfaces/ 
 └── utils/
 
 ________________________________________
