@@ -1,3 +1,13 @@
+<h2>API REST with Node.js and MongoDB</h2>
+
+<h3>• Express Framework</h3>
+<h3>• MongoDB with ODM Mongoose</h3>
+<h3>• MongoDB Atlas</h3>
+<h3>• Nodemon Package</h3>
+<h3>• Yarn</h3>
+
+________________________________________
+
 <h2>Clean Achitecture Structure Description</h2>
 
 <h3>src/</h3>
