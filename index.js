@@ -1,5 +1,6 @@
+require('dotenv').config()
 const express = require('express')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const app = express()
 
 // config for json files
@@ -12,13 +13,13 @@ app.use(
 app.use(express.json())
 
 // API routes
-const personRoutes = require('./app/routes/personRoutes');
+const personRoutes = require('./src/app/routes/personRoutes');
 app.use('/person', personRoutes)
 
 
 // connect to database
-const DB_USER = 'edsonhrf'
-const DB_PASSWORD = encodeURIComponent('wekrQxjH1nyDar37')
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 mongoose
     .connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@apicluster.fiywgdd.mongodb.net/school_database?retryWrites=true&w=majority`)
