@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+
 const app = express()
 
 // config for json files
@@ -12,7 +13,12 @@ app.use(
 
 app.use(express.json())
 
-// API routes
+//Public route - Home Page
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "Bem-vindos à Home Page!"})
+})
+
+// Private routes
 const personRoutes = require('./src/app/routes/personRoutes');
 app.use('/person', personRoutes)
 
