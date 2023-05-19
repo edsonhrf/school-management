@@ -16,6 +16,12 @@ app.use(express.json())
 const personRoutes = require('./src/app/routes/personRoutes');
 app.use('/person', personRoutes)
 
+const studentRoutes = require('./src/app/routes/studentRoutes');
+app.use('/student', studentRoutes)
+
+const teacherRoutes = require('./src/app/routes/teacherRoutes');
+app.use('/teacher', teacherRoutes)
+
 
 // connect to database
 const DB_USER = process.env.DB_USER
