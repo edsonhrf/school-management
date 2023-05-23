@@ -7,7 +7,9 @@ const personSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
+    lowercase: true,
   },
   phone: {
     type: String,
@@ -15,6 +17,10 @@ const personSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 const Person = mongoose.model('Person', personSchema);

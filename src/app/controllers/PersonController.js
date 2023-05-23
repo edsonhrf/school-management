@@ -1,4 +1,4 @@
-const PersonService = require('../services/PersonService');
+const PersonService = require("../services/PersonService");
 
 // create
 exports.createPerson = async (req, res) => {
@@ -6,9 +6,9 @@ exports.createPerson = async (req, res) => {
 
   try {
     await PersonService.createPerson({ name, email, phone, address });
-    res.status(201).json({ message: 'Person created successfully!' });
+    res.status(201).json({ message: "Person created successfully!" });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -30,7 +30,7 @@ exports.getPersonById = async (req, res) => {
     const person = await PersonService.getPersonById(id);
 
     if (!person) {
-      res.status(422).json({ message: 'Person not found!' });
+      res.status(422).json({ message: "Person not found!" });
       return;
     }
 
@@ -54,10 +54,10 @@ exports.updatePerson = async (req, res) => {
     });
 
     if (updatedPerson.matchedCount === 0) {
-      res.status(422).json({ message: 'Person not found!' });
+      res.status(422).json({ message: "Person not found!" });
       return;
     } else {
-      res.status(422).json({ message: 'Person updated successfully!' });
+      res.status(422).json({ message: "Person updated successfully!" });
       return;
     }
   } catch (error) {
@@ -73,11 +73,11 @@ exports.deletePerson = async (req, res) => {
     const deletedPerson = await PersonService.deletePerson(id);
 
     if (!deletedPerson) {
-      res.status(422).json({ message: 'Person not found!' });
+      res.status(422).json({ message: "Person not found!" });
       return;
     }
 
-    res.status(200).json({ message: 'Person deleted successfully!' });
+    res.status(200).json({ message: "Person deleted successfully!" });
   } catch (error) {
     res.status(500).json({ error: error });
   }

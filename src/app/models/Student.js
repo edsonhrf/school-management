@@ -13,8 +13,12 @@ const studentSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
-  // Other specific fields from students
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 const Student = mongoose.model('Student', studentSchema);

@@ -13,8 +13,12 @@ const teacherSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
-  // Other specific fields from teachers
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 const Teacher = mongoose.model('Teacher', teacherSchema);
