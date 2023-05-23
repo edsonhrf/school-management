@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const personRoutes = require("./src/app/routes/personRoutes");
 const studentRoutes = require("./src/app/routes/studentRoutes");
+const teacherRoutes = require("./src/app/routes/teacherRoutes");
 const db = require("./src/database/db");
 
 const app = express();
@@ -20,7 +21,7 @@ app.use("/person", personRoutes);
 
 app.use('/student', studentRoutes)
 
-// app.use('/teacher', teacherRoutes)
+app.use('/teacher', teacherRoutes);
 
 // connect to database
 db.connectToDB()
