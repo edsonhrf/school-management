@@ -1,5 +1,10 @@
 const Person = require('../models/Person');
 
+//login
+exports.findOne = (filter) => {
+  return Person.findOne(filter);
+};
+
 // create
 exports.createPerson = async (personData) => {
   const person = new Person(personData);

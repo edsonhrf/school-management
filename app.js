@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const personRoutes = require("./src/app/routes/personRoutes");
+const studentRoutes = require("./src/app/routes/studentRoutes");
 const db = require("./src/database/db");
 
 const app = express();
@@ -17,10 +18,8 @@ app.get("/", (req, res) => {
 // Private routes
 app.use("/person", personRoutes);
 
-// const studentRoutes = require('./src/app/routes/studentRoutes');
-// app.use('/student', studentRoutes)
+app.use('/student', studentRoutes)
 
-// const teacherRoutes = require('./src/app/routes/teacherRoutes');
 // app.use('/teacher', teacherRoutes)
 
 // connect to database
