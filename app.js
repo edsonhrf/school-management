@@ -1,42 +1,34 @@
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
+require("dotenv").config();
+const express = require("express");
+const personRoutes = require("./src/app/routes/personRoutes");
+const db = require("./src/database/db");
 
-const app = express()
+const app = express();
 
 // config for json files
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-)
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(express.json())
-
-//Public route - Home Page
-app.get('/', (req, res) => {
-    res.status(200).json({ message: "Bem-vindos à Home Page!"})
-})
+// Public route - Home Page
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to Home Page!" });
+});
 
 // Private routes
-const personRoutes = require('./src/app/routes/personRoutes');
-app.use('/person', personRoutes)
+app.use("/person", personRoutes);
 
-const studentRoutes = require('./src/app/routes/studentRoutes');
-app.use('/student', studentRoutes)
+// const studentRoutes = require('./src/app/routes/studentRoutes');
+// app.use('/student', studentRoutes)
 
-const teacherRoutes = require('./src/app/routes/teacherRoutes');
-app.use('/teacher', teacherRoutes)
-
+// const teacherRoutes = require('./src/app/routes/teacherRoutes');
+// app.use('/teacher', teacherRoutes)
 
 // connect to database
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
-
-mongoose
-    .connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@apicluster.fiywgdd.mongodb.net/school_database?retryWrites=true&w=majority`)
-    .then(() => {
-        console.log('Database connected successfully!')
-        app.listen(5000)
-    })
-    .catch((err) => console.log(err))
+db.connectToDB()
+  .then(() => {
+    console.log("Database connected successfully!");
+    app.listen(5000, () => {
+      console.log("Server is running on port 5000");
+    });
+  })
+  .catch((err) => console.log(err));
