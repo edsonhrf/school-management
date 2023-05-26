@@ -54,7 +54,7 @@ exports.updatePerson = async (req, res) => {
     });
 
     if (updatedPerson.matchedCount === 0) {
-      res.status(422).json({ message: "Person not found!" });
+      res.status(404).json({ message: "Person not found!" });
       return;
     } else {
       res.status(422).json({ message: "Person updated successfully!" });
@@ -73,7 +73,7 @@ exports.deletePerson = async (req, res) => {
     const deletedPerson = await PersonService.deletePerson(id);
 
     if (!deletedPerson) {
-      res.status(422).json({ message: "Person not found!" });
+      res.status(404).json({ message: "Person not found!" });
       return;
     }
 

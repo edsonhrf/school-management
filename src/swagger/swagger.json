@@ -1,0 +1,199 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Management School API",
+    "description": "This API aims at school management",
+    "termsOfService": "http://localhost:5000/",
+    "contact": {
+      "email": "edsonhrf@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Development API"
+    }
+  ],
+  "paths": {
+    "/person": {
+      "post": {
+        "summary": "Physical person registration",
+        "description": "This route is responsible for registering the physical person",
+        "tags": ["PhysicalPerson"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              },
+              "examples": {
+                "person": {
+                  "value": {
+                    "name": "Edson Henrique",
+                    "email": "edsonhrf@gmail.com",
+                    "phone": "+5521994715075",
+                    "address": "1600 Amphitheatre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Person created successfully!"
+          },
+          "500": {
+            "description": "Internal Server Error!"
+          }
+        }
+      },
+      "get": {
+        "description": "Find people",
+        "summary": "Find all physical persons",
+        "tags": ["PhysicalPerson"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/person/{id}": {
+      "get": {
+        "description": "Find person",
+        "summary": "Find person by id",
+        "tags": ["PhysicalPerson"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the person",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Physical person update",
+        "description": "This route is responsible for update the physical person",
+        "tags": ["PhysicalPerson"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the person",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              },
+              "examples": {
+                "person": {
+                  "value": {
+                    "name": "Edson Henrique",
+                    "email": "edsonhrf@gmail.com",
+                    "phone": "+5521994715075",
+                    "address": "1600 Amphitheatre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Person not found!"
+          },
+          "422": {
+            "description": "Person updated successfully!"
+          },
+          "500": {
+            "description": "Internal Server Error!"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Physical person delete",
+        "description": "This route is responsible for delete the physical person",
+        "tags": ["PhysicalPerson"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the person",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Person not found!"
+          },
+          "422": {
+            "description": "Person deleted successfully!"
+          },
+          "500": {
+            "description": "Internal Server Error!"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "date"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

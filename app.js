@@ -1,5 +1,7 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocs = require('./src/swagger/swagger.json');
 const personRoutes = require("./src/app/routes/personRoutes");
 const studentRoutes = require("./src/app/routes/studentRoutes");
 const teacherRoutes = require("./src/app/routes/teacherRoutes");
@@ -15,6 +17,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to Home Page!" });
 });
+
+// Swagger route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Private routes
 app.use("/person", personRoutes);

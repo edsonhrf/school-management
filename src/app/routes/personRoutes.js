@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const checkToken = require('../middlewares/checkToken');
 
 const personController = require('../controllers/PersonController');
 
 // create
-router.post('/', personController.createPerson);
+router.post('/', checkToken, personController.createPerson);
 
 // read
 router.get('/', personController.getPeople);
