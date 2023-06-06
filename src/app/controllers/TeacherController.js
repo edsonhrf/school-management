@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const TeacherService = require("../services/TeacherService");
-const PersonService = require("../services/PersonService");
+const EmployeeRegistrationService = require("../services/EmployeeRegistrationService");
 
 // login
 exports.teacherLogin = async (req, res) => {
@@ -9,7 +9,7 @@ exports.teacherLogin = async (req, res) => {
 
   try {
     //check if person exists
-    const personExists = await PersonService.findOne({ email: email });
+    const personExists = await EmployeeRegistrationService.findOne({ email: email });
 
     if (!personExists) {
       return res
@@ -55,7 +55,7 @@ exports.createTeacher = async (req, res) => {
   const { personId, subject, password, confirmPassword } = req.body;
 
   try {
-    const existingPerson = await PersonService.getPersonById(personId);
+    const existingPerson = await EmployeeRegistrationService.getPersonById(personId);
     if (!existingPerson) {
       return res
         .status(400)
