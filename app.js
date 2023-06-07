@@ -6,8 +6,14 @@ const employeeRegistrationRoutes = require("./src/app/routes/employeeRegistratio
 const studentRoutes = require("./src/app/routes/studentRoutes");
 const teacherRoutes = require("./src/app/routes/teacherRoutes");
 const db = require("./src/database/db");
+const cors = require('cors');
 
 const app = express();
+
+//CORS policy
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
 
 // config for json files
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +28,7 @@ app.get("/", (req, res) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Private routes
-app.use("/employee", employeeRegistrationRoutes);
+app.use('/employee', employeeRegistrationRoutes);
 
 app.use('/student', studentRoutes)
 

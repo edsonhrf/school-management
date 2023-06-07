@@ -3,12 +3,12 @@ const transporter = require('../config/emailConfig');
 
 // create
 exports.createPerson = async (req, res) => {
-  const { name, email, phone, address, employeeType } = req.body;
+  const { name, email, phone, address, enrollType } = req.body;
 
   try {
     const registrationNumber = req.registrationNumber;
 
-    await EmployeeRegistrationService.createPerson({ name, email, phone, address, employeeType, registrationNumber });
+    await EmployeeRegistrationService.createPerson({ name, email, phone, address, enrollType, registrationNumber });
     res.status(201).json({ message: "Employee registrated successfully!" });
 
     // Send email notification
@@ -27,6 +27,7 @@ exports.createPerson = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Error in createPerson:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -62,7 +63,7 @@ exports.getPersonById = async (req, res) => {
 // update all object
 exports.updatePerson = async (req, res) => {
   const id = req.params.id;
-  const { name, email, phone, address, employeeType } = req.body;
+  const { name, email, phone, address, enrollType } = req.body;
 
   try {
     const updatedPerson = await EmployeeRegistrationService.updatePerson(id, {
@@ -70,7 +71,7 @@ exports.updatePerson = async (req, res) => {
       email,
       phone,
       address,
-      employeeType
+      enrollType
     });
 
     if (updatedPerson.matchedCount === 0) {

@@ -18,10 +18,10 @@ const employeeRegistrationSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    employeeType: {
+    enrollType: {
       type: String,
       required: true,
-      enum: ["admin", "teacher", "principal", "coordinator"],
+      enum: ["student", "employee"],
     },
     registrationNumber: {
       type: String,

@@ -6,7 +6,7 @@ const generateRegistrationNumber = require('../middlewares/generateRegistrationN
 const employeeRegistrationController = require('../controllers/EmployeeRegistrationController');
 
 // create
-router.post('/', checkToken, generateRegistrationNumber, employeeRegistrationController.createPerson);
+router.post('/', /*checkToken*/ generateRegistrationNumber, employeeRegistrationController.createPerson);
 
 // read
 router.get('/', employeeRegistrationController.getPeople);
