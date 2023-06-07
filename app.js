@@ -3,6 +3,7 @@ const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require('./src/swagger/swagger.json');
 const employeeRegistrationRoutes = require("./src/app/routes/employeeRegistrationRoutes");
+const userRegistrationRoutes = require("./src/app/routes/userRegistrationRoutes");
 const studentRoutes = require("./src/app/routes/studentRoutes");
 const teacherRoutes = require("./src/app/routes/teacherRoutes");
 const db = require("./src/database/db");
@@ -29,6 +30,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Private routes
 app.use('/employee', employeeRegistrationRoutes);
+
+app.use('/user', userRegistrationRoutes);
 
 app.use('/student', studentRoutes)
 

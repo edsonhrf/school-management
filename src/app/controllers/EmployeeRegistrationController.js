@@ -6,9 +6,9 @@ exports.createPerson = async (req, res) => {
   const { name, email, phone, address, enrollType } = req.body;
 
   try {
-    const registrationNumber = req.registrationNumber;
+    const enrollmentNumber = req.enrollmentNumber;
 
-    await EmployeeRegistrationService.createPerson({ name, email, phone, address, enrollType, registrationNumber });
+    await EmployeeRegistrationService.createPerson({ name, email, phone, address, enrollType, enrollmentNumber });
     res.status(201).json({ message: "Employee registrated successfully!" });
 
     // Send email notification
@@ -16,7 +16,7 @@ exports.createPerson = async (req, res) => {
       from: 'edsonhrf@gmail.com',
       to: email,
       subject: 'Registration confimation success',
-      text: `Your registration was successfully completed.\n\nYour registration number is: ${registrationNumber}.\n\nPlease use this number to register in the school application and create your password.\n\n\nRegards,\nSchool Name.`
+      text: `Your registration was successfully completed.\n\nYour registration number is: ${enrollmentNumber}.\n\nPlease use this number to register in the school application and create your password.\n\n\nRegards,\nSchool Name.`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

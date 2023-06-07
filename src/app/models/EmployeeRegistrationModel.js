@@ -23,7 +23,7 @@ const employeeRegistrationSchema = new mongoose.Schema(
       required: true,
       enum: ["student", "employee"],
     },
-    registrationNumber: {
+    enrollmentNumber: {
       type: String,
       unique: true,
       required: true,
@@ -34,7 +34,7 @@ const employeeRegistrationSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "employee_registration", // collection name
+    collection: "employee_registration",
   }
 );
 
