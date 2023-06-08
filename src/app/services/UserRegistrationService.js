@@ -1,4 +1,4 @@
-const UserRegistration = require('../models/UserRegistrationModel');
+const UserRegistration = require("../models/UserRegistrationModel");
 
 exports.createUser = async (userData) => {
   const user = new UserRegistration(userData);
@@ -19,4 +19,8 @@ exports.updateUser = (id, userData) => {
 
 exports.deleteUser = (id) => {
   return UserRegistration.deleteOne({ _id: id });
+};
+
+exports.findOne = (filter) => {
+  return UserRegistration.findOne(filter);
 };

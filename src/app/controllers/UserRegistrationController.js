@@ -1,7 +1,9 @@
 const User = require("../models/UserRegistrationModel");
 const EmployeeRegistrationService = require("../services/EmployeeRegistrationService");
 const UserRegistrationService = require("../services/UserRegistrationService");
+const InvalidTokenListService = require("../services/InvalidTokenListService");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.createUser = async (req, res) => {
   try {
@@ -10,14 +12,14 @@ exports.createUser = async (req, res) => {
     //check if an enroll registration exists
     const existingUserWithThisEnrollmentNumber =
       await EmployeeRegistrationService.findOne({
-        enrollmentNumber: enrollmentNumber
+        enrollmentNumber: enrollmentNumber,
       });
     if (!existingUserWithThisEnrollmentNumber) {
       return res
         .status(404)
         .json({ error: "Enrollment number not found in the institution" });
     }
-    
+
     //check if a user with this enrollmentNumber exists
     const existingUser = await User.findOne({ enrollmentNumber });
     if (existingUser) {
@@ -103,5 +105,63 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({ error: "Failed to delete user" });
+  }
+};
+
+// login with email or enrollmentNumber
+exports.userLogin = async (req, res) => {
+  const { email, enrollmentNumber, password } = req.body;
+
+  try {
+    let userExists;
+
+    if (email) {
+      userExists = await UserRegistrationService.findOne({ email });
+    } else if (enrollmentNumber) {
+      userExists = await UserRegistrationService.findOne({ enrollmentNumber });
+    }
+
+    if (!userExists) {
+      return res.status(400).json({
+        message:
+          "Invalid credentials. Please check your email or enrollment number and password.",
+      });
+    }
+
+    const checkPassword = await bcrypt.compare(password, userExists.password);
+
+    if (!checkPassword) {
+      return res.status(401).json({
+        message:
+          "Invalid credentials. Please check your email or enrollment number and password.",
+      });
+    }
+
+    const secret = process.env.SECRET;
+    const token = jwt.sign({ id: userExists._id }, secret, {
+      expiresIn: "24h",
+    });
+
+    res.status(200).json({ message: "Authentication successful.", token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+//logout
+exports.userLogout = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    await InvalidTokenListService.createToken(token);
+
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };
